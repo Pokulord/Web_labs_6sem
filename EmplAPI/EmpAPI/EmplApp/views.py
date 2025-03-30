@@ -51,7 +51,7 @@ def EmpApi(request, id = 0):
         return JsonResponse("Failed to add ", safe = False)
     elif request.method == "PUT":
         employee_data = JSONParser().parse(request)
-        employee = Employess.objects.get(EmployeeId=employee_data['EmpID'])
+        employee = Employess.objects.get(EmpID=employee_data['EmpID'])
         employees_serializer =  EmployeeSerializer(employee, data = employee_data)
         if employees_serializer.is_valid():
             employees_serializer.save()
@@ -59,14 +59,14 @@ def EmpApi(request, id = 0):
         return JsonResponse("Failed to Update")
     
     elif request.method == "DELETE":
-        employee = Employess.objects.get(EmployeeID=id)
+        employee = Employess.objects.get(EmpID=id)
         employee.delete()
         return JsonResponse("Deleted Successfully", safe = False)
     
 
 @csrf_exempt
 def SaveFile(request):
-    file = request.FILES['file']
+    file = request.FILES['upload_file']
     file_name = default_storage.save(file.name, file)
     return JsonResponse(file_name, safe= False)
     
