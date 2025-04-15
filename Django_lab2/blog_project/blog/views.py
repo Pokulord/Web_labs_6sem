@@ -23,7 +23,7 @@ class PostDetail(generic.DetailView):
 # Для запросов API
 
 @csrf_exempt
-def PostAPI(request, q_title = "Empty"):
+def PostAPI(request, q_t="None"):
     if request.method == "GET":
         posts = Post.objects.all()
         posts_ser = PostSerializer(posts, many = True)
@@ -41,9 +41,9 @@ def PostAPI(request, q_title = "Empty"):
         post_ser = PostSerializer(post, data = post_data)
         if post_ser.is_valid():
             post_ser.save()
-            return JsonResponse("Updated Successfully", safe= True)
+            return JsonResponse("Updated Successfully", safe= False)
         return JsonResponse("Failed to update", safe= False)
     elif request.method == "DELETE":
-        post = Post.objects.get(title=q_title)
+        post = Post.objects.get(title=q_t)
         post.delete()
         return JsonResponse("Deleted Successfully", safe= False)
