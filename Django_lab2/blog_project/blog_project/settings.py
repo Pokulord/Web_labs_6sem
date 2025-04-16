@@ -44,6 +44,11 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig'
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES':[
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
 
 CORS_ORIGIN_ALLOW_ALL = True
 
