@@ -1,5 +1,5 @@
 from . import views
-from django.urls import path, re_path,include
+from django.urls import path, include
 from blog import views
 from rest_framework.routers import DefaultRouter
 
